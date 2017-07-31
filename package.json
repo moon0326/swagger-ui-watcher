@@ -1,0 +1,24 @@
+{
+  "name": "swagger-watcher",
+  "version": "0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "express": "^4.15.3",
+    "node-watch": "^0.5.5",
+    "open": "0.0.5",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.3",
+    "swagger-parser": "^3.4.1",
+    "swagger-ui-dist": "^3.1.1"
+  },
+  "bin": {
+    "swagger-watcher": "bin/swagger-watcher.js"
+  }
+}
