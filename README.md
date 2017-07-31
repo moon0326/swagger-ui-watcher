@@ -11,7 +11,7 @@ npm install swagger-watcher -g
 ## Usage
 
 ```
-swagger-watcher ./swagger-main-file.json ./folder-with-swagger-files
+swagger-watcher ./main-swagger-file.json ./folder-with-swagger-files
 ```
 
 You can also save a bundle with **--bundle** option whenever there is a change.
