@@ -1,8 +1,8 @@
 {
-  "name": "swagger-watcher",
+  "name": "swagger-ui-watcher",
   "version": "0.2.0",
   "main": "index.js",
-  "repository": "https://github.com/moon0326/swagger-watcher.git",
+  "repository": "https://github.com/moon0326/swagger-ui-watcher.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,6 @@
     "swagger-ui-dist": "^3.1.1"
   },
   "bin": {
-    "swagger-watcher": "bin/swagger-watcher.js"
+    "swagger-ui-watcher": "bin/swagger-ui-watcher.js"
   }
 }
