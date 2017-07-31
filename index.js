@@ -26,17 +26,26 @@ io.on('connection', function(client) {
     console.log('Client connected.');
 });
 
+
 function start(swaggerFile, targetDir, port, hostname) {
 
   watch(targetDir, {recursive: true}, function(eventType, name) {
     swaggerParser.bundle(swaggerFile, function(err, bundled) {
-      console.log("File changed. Sent updated spec to the browser.")
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log("File changed. Sent updated spec to the browser.");
       io.sockets.emit('updateSpec', JSON.stringify(bundled));
     });  
   });
 
   app.get('/spec', function(req, res) {
     swaggerParser.bundle(swaggerFile, function(err, bundled) {
+      if (err) {
+        res.send(JSON.stringify(err));
+        return;
+      }
       res.send(JSON.stringify(bundled));
     });      
   });

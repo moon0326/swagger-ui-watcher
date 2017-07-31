@@ -35,4 +35,14 @@ if (typeof program.host === 'undefined') {
     program.host = "127.0.0.1";
 }
 
-require("../index.js").start(swaggerFile, targetDir, program.port,program.host,program.folder);
+if (!fs.existsSync(targetDirValue)) {
+    console.error(targetDirValue + " does not exist.");
+    process.exit(1);
+}
+
+if (!fs.existsSync(swaggerFileValue)) {
+    console.error(swaggerFileValue + " does not exist.");
+    process.exit(1);
+}
+
+require("../index.js").start(swaggerFileValue, targetDirValue, program.port,program.host,program.folder);
