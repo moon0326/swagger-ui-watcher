@@ -27,7 +27,7 @@ io.on('connection', function(client) {
 });
 
 
-function start(swaggerFile, targetDir, port, hostname) {
+function start(swaggerFile, targetDir, port, hostname, bundleTo) {
 
   watch(targetDir, {recursive: true}, function(eventType, name) {
     swaggerParser.bundle(swaggerFile, function(err, bundled) {
@@ -36,7 +36,18 @@ function start(swaggerFile, targetDir, port, hostname) {
         return;
       }
       console.log("File changed. Sent updated spec to the browser.");
-      io.sockets.emit('updateSpec', JSON.stringify(bundled));
+      var bundleString = JSON.stringify(bundled, null, 2);
+      io.sockets.emit('updateSpec', bundleString);
+      if (typeof bundleTo === 'string') {
+        fs.writeFile(bundleTo, bundleString, function(err) {
+          if (err) {
+            console.error(err);
+            return;
+          }
+
+          console.log('Saved bundle file at ' + bundleTo);
+        });
+      }
     });  
   });
 

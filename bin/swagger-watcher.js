@@ -11,6 +11,7 @@ program
     .arguments('<swaggerFile> <targetDir>')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
+    .option('-b, --bundle <bundleTo>', 'Create bundle on file change')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -24,15 +25,25 @@ if (typeof targetDirValue === 'undefined') {
 }
 
 if (typeof swaggerFileValue === 'undefined') {
-    console.error("<swaggerFileValue> is required. Syntax is swagger-watcher <swaggerFile> <targetDir>");
+    console.error("<swaggerFile> is required. Syntax is swagger-watcher <swaggerFile> <targetDir>");
     process.exit(1);
 }
 
 if (typeof program.port === 'undefined') {
     program.port = 8000;
 }
+
 if (typeof program.host === 'undefined') {
     program.host = "127.0.0.1";
+}
+
+if (typeof program.bundle === 'undefined') {
+    program.bundle = null;
+}
+
+if (program.bundle === swaggerFileValue) {
+    console.error("<bundle> value cannot be same as <swaggerFile> value.");
+    process.exit(1);
 }
 
 if (!fs.existsSync(targetDirValue)) {
@@ -45,4 +56,10 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
-require("../index.js").start(swaggerFileValue, targetDirValue, program.port,program.host,program.folder);
+require("../index.js").start(
+    swaggerFileValue, 
+    targetDirValue, 
+    program.port,
+    program.host,
+    program.bundle
+);
