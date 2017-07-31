@@ -14,7 +14,7 @@ npm install swagger-ui-watcher -g
 swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files
 ```
 
-You can also save a bundle with **--bundle** option whenever there is a change.
+You can also save a bundle with **--bundle** option on file change event.
 
 ```
 swagger-ui-watcher ./swagger-main-file.json ./folder-with-swagger-files --bundle=./bundled.json
