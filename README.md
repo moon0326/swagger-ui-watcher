@@ -20,6 +20,6 @@ You can also save a bundle with **--bundle** option on file change event.
 swagger-ui-watcher ./swagger-main-file.json ./folder-with-swagger-files --bundle=./bundled.json
 ``` 
 
-See it in action
+Click the image to see it in action
 
 [![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/U_HT8Q5nayI)
