@@ -8,6 +8,8 @@ Swagger UI Watcher detects changes in your local Swagger files and reload Swagge
 - Relative and local system $ref does not work with online Swagger Editor v3
 - Manually creating bundle from multiple Swagger files after each update isn't very practical and tiresome.
 - Using my editor/ide of choice is awesome.
+- I was bored.
+
 ## Installation
 
 ```
