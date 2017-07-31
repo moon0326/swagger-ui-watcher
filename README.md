@@ -13,5 +13,3 @@ npm install swagger-watcher -g
 ```
 swagger-watcher ./swagger-main-file.json ./folder-with-swagger-files
 ```
-
-Weekend Project: 2
