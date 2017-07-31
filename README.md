@@ -1,6 +1,6 @@
 # Swagger Watcher
 
-Swagger Watcher detects changes your local Swagger files and reload Swagger UI in your browser to give you fluid workflow. It is primary developed to work with multiple Swagger files using $ref.
+Swagger Watcher detects changes your local Swagger files and reload Swagger UI in your browser to give you fluid workflow. It is primarily developed to work with multiple Swagger files using $ref.
 
 ## Installation
 
