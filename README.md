@@ -11,5 +11,5 @@ npm install swagger-watcher -g
 ## Usage
 
 ```
-swagger-watcher ./swagger-main-file.json ./folder-with-swagger-files
+swagger-watcher ./main-swagger-file.json ./folder-with-swagger-files
 ```
