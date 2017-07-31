@@ -28,4 +28,4 @@ swagger-ui-watcher ./swagger-main-file.json ./folder-with-swagger-files --bundle
 
 Click the image to see it in action
 
-[![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/U_HT8Q5nayI)
+[![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/s-77RrN311c)
