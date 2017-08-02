@@ -27,8 +27,16 @@
       background: #fafafa;
     }
 
-    #errors {
+    #errors-container {
       color: red;
+      background: #fff;
+      position: absolute;
+      top: 0;
+      margin:0;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      display: none;
     }
   </style>
 </head>
@@ -68,9 +76,11 @@
 
   </defs>
 </svg>
-
+<pre id='errors-container'>
+  <div style='font-size: 1.2em'>There was an error while processing your files. Please fix the error and save the file.</div>
+  <div id='errors'></div>
+</pre>
 <div id="swagger-ui"></div>
-<pre id='errors'></pre>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>   
 <script src="./swagger-ui-bundle.js"> </script>
@@ -81,7 +91,6 @@ window.onload = function() {
   
   // Build a system
   const ui = SwaggerUIBundle({
-    // url: window.location.href + "spec",
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
@@ -96,13 +105,18 @@ window.onload = function() {
 
   window.ui = ui
   var socket = io.connect(window.location.href);
+  var errorsContainer = document.getElementById('errors-container');
   var errors = document.getElementById('errors');
+  var swaggerUi = document.getElementById('swagger-ui');
   socket.on('updateSpec', function(data) {
-      errors.innerHTML = '';
+      swaggerUi.style.display = 'block';
+      errorsContainer.style.display = 'none';
       ui.specActions.updateLoadingStatus("success")
       ui.specActions.updateSpec(data)
   });
   socket.on('showError', function(data) {
+    errorsContainer.style.display = 'block';
+    swaggerUi.style.display = 'none';
     errors.innerHTML = JSON.stringify(data, null, 2);
   });
 
