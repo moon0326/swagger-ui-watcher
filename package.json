@@ -1,6 +1,6 @@
 {
   "name": "swagger-ui-watcher",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/moon0326/swagger-ui-watcher.git",
   "scripts": {
