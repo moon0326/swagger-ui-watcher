@@ -26,6 +26,10 @@
       margin:0;
       background: #fafafa;
     }
+
+    #errors {
+      color: red;
+    }
   </style>
 </head>
 
@@ -65,8 +69,9 @@
   </defs>
 </svg>
 
-<div id='errors'></div>
 <div id="swagger-ui"></div>
+<pre id='errors'></pre>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>   
 <script src="./swagger-ui-bundle.js"> </script>
 <script src="./swagger-ui-standalone-preset.js"> </script>
@@ -76,7 +81,7 @@ window.onload = function() {
   
   // Build a system
   const ui = SwaggerUIBundle({
-    url: window.location.href + "spec",
+    // url: window.location.href + "spec",
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
@@ -90,12 +95,18 @@ window.onload = function() {
   })
 
   window.ui = ui
-
   var socket = io.connect(window.location.href);
+  var errors = document.getElementById('errors');
   socket.on('updateSpec', function(data) {
+      errors.innerHTML = '';
       ui.specActions.updateLoadingStatus("success")
       ui.specActions.updateSpec(data)
   });
+  socket.on('showError', function(data) {
+    errors.innerHTML = JSON.stringify(data, null, 2);
+  });
+
+  socket.emit('uiReady', {});
 }
 </script>
 </body>
