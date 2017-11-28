@@ -3,7 +3,8 @@
 var path = require('path');
 var fs = require('fs');
 var open = require('open');
-var swaggerUiDist = path.dirname(require.resolve('swagger-ui-dist'));
+var nodeModules = path.resolve(path.resolve(__dirname, ''), 'node_modules');
+var swaggerEditorDist = path.dirname(require.resolve('swagger-editor-dist/index.html'));
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -40,7 +41,7 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
     res.sendFile(__dirname + "/index.html");
   });
 
-  app.use(express.static(swaggerUiDist));
+  app.use(express.static(swaggerEditorDist));
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
