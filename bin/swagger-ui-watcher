@@ -6,7 +6,7 @@ var fs = require('fs');
 
 program
     .version('1.0')
-    .command('watch', 'watch')
-    .command('build', 'build')
+    .command('watch', 'watch the target directory for any changes and update the swagger UI')
+    .command('build', 'build the bundle from target directory')
 
 program.parse(process.argv);

@@ -7,8 +7,8 @@ var swaggerFileValue;
 var targetDirValue;
 
 program
-    .arguments('<operation> <swaggerFile>')
-    .option('-b, --bundle <bundleTo>', 'Create bundle on file change')
+    .arguments('<swaggerFile> <targetDir>')
+    .option('-b, --bundle <bundleTo>', 'Create bundle on file change, default bundle file is bundled.json')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;

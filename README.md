@@ -17,15 +17,31 @@ npm install swagger-ui-watcher -g
 
 ## Usage
 
+This tool has two options, first one is watching the target directory for any changes and updating the swagger UI, and second one is building the swagger bundle file from directory
+
+For watching the changes in target directory, following command is used
 ```
-swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files
+swagger-ui-watcher watch ./main-swagger-file.json ./folder-with-swagger-files
 ```
 
 You can also save a bundle with **--bundle** option on file change event.
 
 ```
-swagger-ui-watcher ./swagger-main-file.json ./folder-with-swagger-files --bundle=./bundled.json
+swagger-ui-watcher watch ./swagger-main-file.json ./folder-with-swagger-files --bundle=./bundled.json
 ``` 
+
+For creating the bundled file
+
+```
+swagger-ui-watcher build ./swagger-multi-files/swag.yaml ./swagger-multi-files/
+```
+If you do not provide the **--bundle** option, the default bundle file created is **bundled.json** in the current working directory
+
+You can also provide a bundle with **--bundle** option.
+
+```
+swagger-ui-watcher build ./swagger-multi-files/swag.yaml ./swagger-multi-files/ --bundle=./bundled.json
+```
 
 Click the image to see it in action
 
