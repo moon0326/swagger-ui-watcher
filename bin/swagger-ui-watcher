@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+'use strict';
+
+var program = require('commander');
+var fs = require('fs');
+
+program
+    .version('1.0')
+    .command('watch', 'watch')
+    .command('build', 'build')
+
+program.parse(process.argv);

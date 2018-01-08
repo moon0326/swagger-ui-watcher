@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use strict';
 
 var program = require('commander');
 var fs = require('fs');
@@ -7,17 +6,15 @@ var swaggerFileValue;
 var targetDirValue;
 
 program
-    .version('1.0')
-    .arguments('<swaggerFile> <targetDir>')
+    .arguments('<operation> <swaggerFile>')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
     .option('-b, --bundle <bundleTo>', 'Create bundle on file change')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
-    });
-
-program.parse(process.argv);
+    })
+    .parse(process.argv);
 
 if (typeof targetDirValue === 'undefined') {
     console.error("<targetDir> is required. Syntax is swagger-watcher <swaggerFile> <targetDir>");

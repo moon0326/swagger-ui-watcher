@@ -21,6 +21,6 @@
     "swagger-editor-dist": "^3.1.16"
   },
   "bin": {
-    "swagger-ui-watcher": "bin/swagger-ui-watcher.js"
+    "swagger-ui-watcher": "bin/swagger-ui-watcher"
   }
 }

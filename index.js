@@ -82,6 +82,24 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
   });
 }
 
+function build (swaggerFile, targetDir, bundleTo) {
+  bundle(swaggerFile).then(function (bundled) {
+      var bundleString = JSON.stringify(bundled, null, 2);
+      if (typeof bundleTo === 'string') {
+        fs.writeFile(bundleTo, bundleString, function(err) {
+          if (err) {
+            io.sockets.emit('showError', err);
+            return;
+          }
+          console.log('Saved bundle file at ' + bundleTo);
+        });
+      }
+    }, function (err) {
+      io.sockets.emit('showError', err);
+    });
+}
+
 module.exports = {
-  start: start
+  start: start,
+  build: build
 }
