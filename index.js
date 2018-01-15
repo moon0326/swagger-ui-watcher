@@ -63,15 +63,6 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
       console.log("File changed. Sent updated spec to the browser.");
       var bundleString = JSON.stringify(bundled, null, 2);
       io.sockets.emit('updateSpec', bundleString);
-      if (typeof bundleTo === 'string') {
-        fs.writeFile(bundleTo, bundleString, function(err) {
-          if (err) {
-            io.sockets.emit('showError', err);
-            return;
-          }
-          console.log('Saved bundle file at ' + bundleTo);
-        });
-      }
     }, function (err) {
       io.sockets.emit('showError', err);
     });
@@ -102,4 +93,4 @@ function build (swaggerFile, targetDir, bundleTo) {
 module.exports = {
   start: start,
   build: build
-}
+};

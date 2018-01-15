@@ -8,9 +8,7 @@ var targetDirValue;
 
 program
     .arguments('<swaggerFile> <targetDir>')
-    .option('-p, --port <port>', 'Port to be used. Default is 8000')
-    .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
-    .option('-b, --bundle <bundleTo>', 'Create bundle on file change')
+    .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo, default bundle file is bundled.json')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -27,16 +25,8 @@ if (typeof swaggerFileValue === 'undefined') {
     process.exit(1);
 }
 
-if (typeof program.port === 'undefined') {
-    program.port = 8000;
-}
-
-if (typeof program.host === 'undefined') {
-    program.host = "127.0.0.1";
-}
-
 if (typeof program.bundle === 'undefined') {
-    program.bundle = null;
+    program.bundle = 'bundled.json';
 }
 
 if (program.bundle === swaggerFileValue) {
@@ -54,10 +44,8 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
-require("../index.js").start(
+require("../index.js").build(
     swaggerFileValue, 
     targetDirValue, 
-    program.port,
-    program.host,
     program.bundle
 );
