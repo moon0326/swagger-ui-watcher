@@ -24,17 +24,10 @@ For watching the changes in target directory, following command is used
 swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files
 ```
 
-For creating the bundled file
+For creating the bundled file, provide the optional argument `bundle`
 
 ```
-swagger-ui-builder ./swagger-multi-files/swag.yaml ./swagger-multi-files/
-```
-If you do not provide the **--bundle** option, the default bundle file created is **bundled.json** in the current working directory
-
-You can also provide a bundle with **--bundle** option.
-
-```
-swagger-ui-builder ./swagger-multi-files/swag.yaml ./swagger-multi-files/ --bundle=./bundled.json
+swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files --bundle=./bundled.json
 ```
 
 Click the image to see it in action
