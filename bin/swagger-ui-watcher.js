@@ -7,6 +7,7 @@ var swaggerFileValue;
 var targetDirValue;
 
 program
+    .version('1.0')
     .arguments('<swaggerFile> <targetDir>')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
