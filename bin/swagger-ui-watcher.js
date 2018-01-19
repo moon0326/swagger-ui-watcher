@@ -35,6 +35,15 @@ if (typeof program.host === 'undefined') {
     program.host = "127.0.0.1";
 }
 
+if (typeof program.bundle === 'undefined') {
+    program.bundle = null;
+}
+
+if (program.bundle === swaggerFileValue) {
+    console.error("<bundle> value cannot be same as <swaggerFile> value.");
+    process.exit(1);
+}
+
 if (!fs.existsSync(targetDirValue)) {
     console.error(targetDirValue + " does not exist.");
     process.exit(1);
@@ -45,7 +54,7 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
-if (typeof program.bundle === 'undefined') {
+if (program.bundle === null) {
     require("../index.js").start(
         swaggerFileValue,
         targetDirValue,
