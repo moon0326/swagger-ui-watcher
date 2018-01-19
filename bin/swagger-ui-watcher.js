@@ -45,10 +45,7 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
-console.log(typeof program.bundle);
-
 if (typeof program.bundle === 'undefined') {
-    console.log('watch', program.bundle);
     require("../index.js").start(
         swaggerFileValue,
         targetDirValue,
@@ -56,7 +53,6 @@ if (typeof program.bundle === 'undefined') {
         program.host
     );
 } else {
-    console.log('build', program.bundle);
     require("../index.js").build(
         swaggerFileValue, 
         targetDirValue, 
