@@ -11,13 +11,12 @@ program
     .arguments('<swaggerFile> <targetDir>')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
-    .option('-b, --bundle <bundleTo>', 'Create bundle on file change')
+    .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
-    });
-
-program.parse(process.argv);
+    })
+    .parse(process.argv);
 
 if (typeof targetDirValue === 'undefined') {
     console.error("<targetDir> is required. Syntax is swagger-watcher <swaggerFile> <targetDir>");
@@ -56,10 +55,17 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
-require("../index.js").start(
-    swaggerFileValue, 
-    targetDirValue, 
-    program.port,
-    program.host,
-    program.bundle
-);
+if (program.bundle === null) {
+    require("../index.js").start(
+        swaggerFileValue,
+        targetDirValue,
+        program.port,
+        program.host
+    );
+} else {
+    require("../index.js").build(
+        swaggerFileValue, 
+        targetDirValue, 
+        program.bundle
+    );
+}

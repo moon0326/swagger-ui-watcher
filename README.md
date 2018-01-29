@@ -5,9 +5,10 @@ Swagger UI Watcher detects changes in your local Swagger files and reload Swagge
 ## Why?
 
 - Using online Swagger Editor is annoying. You have to copy and paste your Swagger files back and forth.
-- Relative and local system $ref does not work with online Swagger Editor v3
-- Manually creating bundle from multiple Swagger files after each update isn't very practical and tiresome.
+- Relative and local system $ref do not work with online Swagger Editor v3
+- Manually creating bundle from multiple Swagger files after each update is impractical and tiresome.
 - Using my editor/ide of choice is awesome.
+
 ## Installation
 
 ```
@@ -16,16 +17,17 @@ npm install swagger-ui-watcher -g
 
 ## Usage
 
+For watching the changes in target directory, following command is used
 ```
 swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files
 ```
 
-You can also save a bundle with **--bundle** option on file change event.
+For creating the bundled file, provide the optional argument `bundle`
 
 ```
-swagger-ui-watcher ./swagger-main-file.json ./folder-with-swagger-files --bundle=./bundled.json
-``` 
+swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files --bundle=./bundled.json
+```
 
 Click the image to see it in action
 
-[![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/U_HT8Q5nayI)
+[![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/s-77RrN311c?autoplay=1)
