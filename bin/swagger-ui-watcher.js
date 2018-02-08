@@ -4,6 +4,7 @@
 var version = require('../package.json').version
 var program = require('commander');
 var fs = require('fs');
+var path = require('path');
 var findParentDir = require('find-parent-dir');
 var swaggerFileValue;
 var targetDirValue;
@@ -28,9 +29,13 @@ if (typeof swaggerFileValue === 'undefined') {
 
 if (typeof targetDirValue === 'undefined') {
     try {
-        targetDirValue = findParentDir.sync(__dirname, swaggerFileValue);
+        if (!path.isAbsolute(swaggerFileValue)) {
+            swaggerFileValue = path.resolve(process.cwd(), swaggerFileValue);
+        }
+        targetDirValue = path.dirname(swaggerFileValue);
+        console.log(targetDirValue);
     } catch (err) {
-        console.error(`Failed to resolve [targetDir]/${swaggerFileValue}.\n${help}`);
+        console.error(`Failed to resolve path to [targetDir].\n${help}`);
         process.exit(1);
     }
 }
