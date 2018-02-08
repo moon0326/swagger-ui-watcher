@@ -5,7 +5,6 @@ var version = require('../package.json').version
 var program = require('commander');
 var fs = require('fs');
 var path = require('path');
-var findParentDir = require('find-parent-dir');
 var swaggerFileValue;
 var targetDirValue;
 var help = 'Enter "swagger-ui-watcher --help" for more details.';
