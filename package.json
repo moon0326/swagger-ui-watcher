@@ -1,7 +1,6 @@
 {
   "name": "swagger-ui-watcher",
-  "version": "1.0.1",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "main": "index.js",
   "repository": "https://github.com/moon0326/swagger-ui-watcher.git",
   "scripts": {
@@ -12,14 +11,15 @@
   "dependencies": {
     "commander": "^2.9.0",
     "express": "^4.15.3",
+    "find-parent-dir": "^0.3.0",
     "js-yaml": "^3.10.0",
     "json-refs": "^3.0.2",
     "node-watch": "^0.5.5",
     "open": "0.0.5",
     "path": "^0.12.7",
     "socket.io": "^2.0.3",
-    "swagger-parser": "^3.4.1",
-    "swagger-editor-dist": "^3.1.16"
+    "swagger-editor-dist": "^3.1.16",
+    "swagger-parser": "^3.4.1"
   },
   "bin": {
     "swagger-ui-watcher": "bin/swagger-ui-watcher.js"
