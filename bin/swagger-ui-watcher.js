@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+var version = require('../package.json').version
 var program = require('commander');
 var fs = require('fs');
 var findParentDir = require('find-parent-dir');
@@ -9,7 +10,7 @@ var targetDirValue;
 var help = 'Enter "swagger-ui-watcher --help" for more details.';
 
 program
-    .version('1.1.0')
+    .version(version)
     .arguments('<swaggerFile> [targetDir]')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
