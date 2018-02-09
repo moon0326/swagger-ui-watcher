@@ -32,7 +32,6 @@ if (typeof targetDirValue === 'undefined') {
             swaggerFileValue = path.resolve(process.cwd(), swaggerFileValue);
         }
         targetDirValue = path.dirname(swaggerFileValue);
-        console.log(targetDirValue);
     } catch (err) {
         console.error(`Failed to resolve path to [targetDir].\n${help}`);
         process.exit(1);
