@@ -19,13 +19,13 @@ npm install swagger-ui-watcher -g
 
 For watching the changes in target directory, following command is used
 ```
-swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files
+swagger-ui-watcher ./main-swagger-file.json 
 ```
 
 For creating the bundled file, provide the optional argument `bundle`
 
 ```
-swagger-ui-watcher ./main-swagger-file.json ./folder-with-swagger-files --bundle=./bundled.json
+swagger-ui-watcher ./main-swagger-file.json --bundle=./bundled.json
 ```
 
 Click the image to see it in action
