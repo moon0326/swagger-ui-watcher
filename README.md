@@ -11,10 +11,20 @@ Swagger UI Watcher detects changes in your local Swagger files and reload Swagge
 
 ## Installation
 
+| Version | Swagger Version |
+|--------|--------|
+|  1.0.10      |   2     |
+|  2.0 | 3 |
 
 
 ```
 npm install swagger-ui-watcher -g
+```
+
+The latest version supports OpenAPI 3. If you want to use Swagger 2, run the following command.
+
+```
+npm install swagger-ui-watcher@1.0.10 -g
 ```
 
 ## Usage
