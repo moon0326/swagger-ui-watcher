@@ -17,8 +17,7 @@
     "open": "0.0.5",
     "path": "^0.12.7",
     "socket.io": "^2.0.3",
-    "swagger-editor-dist": "^3.1.16",
-    "swagger-parser": "^3.4.1"
+    "swagger-editor-dist": "^3.3.1"
   },
   "bin": {
     "swagger-ui-watcher": "bin/swagger-ui-watcher.js"
