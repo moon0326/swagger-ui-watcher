@@ -11,6 +11,8 @@ Swagger UI Watcher detects changes in your local Swagger files and reload Swagge
 
 ## Installation
 
+
+
 ```
 npm install swagger-ui-watcher -g
 ```
