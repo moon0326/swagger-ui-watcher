@@ -63,6 +63,19 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
       console.log("File changed. Sent updated spec to the browser.");
       var bundleString = JSON.stringify(bundled, null, 2);
       io.sockets.emit('updateSpec', bundleString);
+    }, function (err) {
+      io.sockets.emit('showError', err);
+    });
+  });
+
+  server.listen(port,hostname, function() {
+    open('http://' + hostname + ':' + port);
+  });
+}
+
+function build (swaggerFile, targetDir, bundleTo) {
+  bundle(swaggerFile).then(function (bundled) {
+      var bundleString = JSON.stringify(bundled, null, 2);
       if (typeof bundleTo === 'string') {
         fs.writeFile(bundleTo, bundleString, function(err) {
           if (err) {
@@ -75,13 +88,9 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
     }, function (err) {
       io.sockets.emit('showError', err);
     });
-  });
-
-  server.listen(port,hostname, function() {
-    open('http://' + hostname + ':' + port);
-  });
 }
 
 module.exports = {
-  start: start
-}
+  start: start,
+  build: build
+};

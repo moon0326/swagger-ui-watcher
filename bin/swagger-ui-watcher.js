@@ -1,32 +1,41 @@
 #!/usr/bin/env node
 'use strict';
 
+var version = require('../package.json').version
 var program = require('commander');
 var fs = require('fs');
+var path = require('path');
 var swaggerFileValue;
 var targetDirValue;
+var help = 'Enter "swagger-ui-watcher --help" for more details.';
 
 program
-    .version('1.0')
-    .arguments('<swaggerFile> <targetDir>')
+    .version(version)
+    .arguments('<swaggerFile> [targetDir]')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
-    .option('-b, --bundle <bundleTo>', 'Create bundle on file change')
+    .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
-    });
+    })
+    .parse(process.argv);
 
-program.parse(process.argv);
-
-if (typeof targetDirValue === 'undefined') {
-    console.error("<targetDir> is required. Syntax is swagger-watcher <swaggerFile> <targetDir>");
+if (typeof swaggerFileValue === 'undefined') {
+    console.error(`<swaggerFile> is required.\n${help}`);
     process.exit(1);
 }
 
-if (typeof swaggerFileValue === 'undefined') {
-    console.error("<swaggerFile> is required. Syntax is swagger-watcher <swaggerFile> <targetDir>");
-    process.exit(1);
+if (typeof targetDirValue === 'undefined') {
+    try {
+        if (!path.isAbsolute(swaggerFileValue)) {
+            swaggerFileValue = path.resolve(process.cwd(), swaggerFileValue);
+        }
+        targetDirValue = path.dirname(swaggerFileValue);
+    } catch (err) {
+        console.error(`Failed to resolve path to [targetDir].\n${help}`);
+        process.exit(1);
+    }
 }
 
 if (typeof program.port === 'undefined') {
@@ -56,10 +65,17 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
-require("../index.js").start(
-    swaggerFileValue, 
-    targetDirValue, 
-    program.port,
-    program.host,
-    program.bundle
-);
+if (program.bundle === null) {
+    require("../index.js").start(
+        swaggerFileValue,
+        targetDirValue,
+        program.port,
+        program.host
+    );
+} else {
+    require("../index.js").build(
+        swaggerFileValue,
+        targetDirValue,
+        program.bundle
+    );
+}
