@@ -39,7 +39,7 @@ Click the image to see it in action
 [![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/s-77RrN311c?autoplay=1)
 
 ## Wo What You Want to Public License
-
+```
                DO WHAT YOU WANT TO PUBLIC LICENSE
                     Version 3, January 2012
 
@@ -53,3 +53,4 @@ Click the image to see it in action
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. You just DO WHAT YOU WANT TO.
+```
