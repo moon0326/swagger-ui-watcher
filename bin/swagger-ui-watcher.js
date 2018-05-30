@@ -15,6 +15,7 @@ program
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
     .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
+    .option('-o, --open', 'Open the view page in the default browser')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -50,6 +51,10 @@ if (typeof program.bundle === 'undefined') {
     program.bundle = null;
 }
 
+if (program.open !== true) {
+  program.open = false;
+}
+
 if (program.bundle === swaggerFileValue) {
     console.error("<bundle> value cannot be same as <swaggerFile> value.");
     process.exit(1);
@@ -70,7 +75,8 @@ if (program.bundle === null) {
         swaggerFileValue,
         targetDirValue,
         program.port,
-        program.host
+        program.host,
+        program.open
     );
 } else {
     require("../index.js").build(

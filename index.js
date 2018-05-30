@@ -36,7 +36,7 @@ function bundle(swaggerFile) {
   });
 }
 
-function start(swaggerFile, targetDir, port, hostname, bundleTo) {
+function start(swaggerFile, targetDir, port, hostname, openBrowser) {
   app.get('/', function(req, res) {
     res.sendFile(__dirname + "/index.html");
   });
@@ -48,7 +48,7 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
     next();
   });
 
-  io.on('connection', function(socket) {  
+  io.on('connection', function(socket) {
     socket.on('uiReady', function(data) {
       bundle(swaggerFile).then(function (bundled) {
         socket.emit('updateSpec', JSON.stringify(bundled));
@@ -69,7 +69,8 @@ function start(swaggerFile, targetDir, port, hostname, bundleTo) {
   });
 
   server.listen(port,hostname, function() {
-    open('http://' + hostname + ':' + port);
+    console.log(`Listening on ${hostname}:${port}`);
+    if (openBrowser) open('http://' + hostname + ':' + port);
   });
 }
 
