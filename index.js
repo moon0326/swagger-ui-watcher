@@ -69,8 +69,9 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
   });
 
   server.listen(port,hostname, function() {
-    console.log(`Listening on ${hostname}:${port}`);
-    if (openBrowser) open('http://' + hostname + ':' + port);
+    var serverUrl = `http://${hostname}:${port}`;
+    console.log(`Listening on ${serverUrl}`);
+    if (openBrowser) open(serverUrl);
   });
 }
 
