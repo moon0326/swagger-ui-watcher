@@ -15,7 +15,8 @@ program
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
     .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
-    .option('-o, --open', 'Open the view page in the default browser')
+    // '--no-open' sets `program.open`, regardless of whether the option was passed
+    .option('--no-open', 'Do not open the view page in the default browser')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -49,10 +50,6 @@ if (typeof program.host === 'undefined') {
 
 if (typeof program.bundle === 'undefined') {
     program.bundle = null;
-}
-
-if (program.open !== true) {
-  program.open = false;
 }
 
 if (program.bundle === swaggerFileValue) {
