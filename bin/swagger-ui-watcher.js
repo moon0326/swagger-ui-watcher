@@ -9,12 +9,17 @@ var swaggerFileValue;
 var targetDirValue;
 var help = 'Enter "swagger-ui-watcher --help" for more details.';
 
+/*
+ * NOTE: the '--no-open' option will set its inverse counterpart `program.open`;
+ * this will always be set accordingly, see https://github.com/tj/commander.js#option-parsing.
+ */
 program
     .version(version)
     .arguments('<swaggerFile> [targetDir]')
     .option('-p, --port <port>', 'Port to be used. Default is 8000')
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
     .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
+    .option('--no-open', 'Do not open the view page in the default browser')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -70,7 +75,8 @@ if (program.bundle === null) {
         swaggerFileValue,
         targetDirValue,
         program.port,
-        program.host
+        program.host,
+        program.open
     );
 } else {
     require("../index.js").build(
