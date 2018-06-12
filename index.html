@@ -94,7 +94,7 @@
       errorsContainer.style.display = 'block';
       swaggerEditor.style.display = 'none';
       console.log(data);
-      errors.innerHTML = JSON.stringify(data, null, 2);
+      errors.innerHTML = data;
     });
 
     socket.emit('uiReady', {});

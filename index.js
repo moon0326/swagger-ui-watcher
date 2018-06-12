@@ -13,6 +13,14 @@ var watch = require('node-watch');
 var JsonRefs = require('json-refs');
 var yaml = require('js-yaml');
 
+function dictToString(dict) {
+  var res = [];
+  for (const [k, v] of Object.entries(dict)) {
+    res.push(`${k}: ${v}`);
+  }
+  return res.join('\n');
+}
+
 function bundle(swaggerFile) {
   var root = yaml.safeLoad(fs.readFileSync(swaggerFile, 'utf8'));
   var options = {
@@ -33,7 +41,7 @@ function bundle(swaggerFile) {
     }
 
     if (Object.keys(resErrors).length > 0) {
-      return Promise.reject(resErrors);
+      return Promise.reject(dictToString(resErrors));
     }
 
     return results.resolved;
@@ -42,7 +50,7 @@ function bundle(swaggerFile) {
       Object.getOwnPropertyNames(e).forEach(function (key) {
         error[key] = e[key];
       });
-      return Promise.reject(error);
+      return Promise.reject(dictToString(error));
   });
 }
 
