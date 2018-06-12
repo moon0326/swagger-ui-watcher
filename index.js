@@ -13,6 +13,14 @@ var watch = require('node-watch');
 var JsonRefs = require('json-refs');
 var yaml = require('js-yaml');
 
+function dictToString(dict) {
+  var res = [];
+  for (const [k, v] of Object.entries(dict)) {
+    res.push(`${k}: ${v}`);
+  }
+  return res.join('\n');
+}
+
 function bundle(swaggerFile) {
   var root = yaml.safeLoad(fs.readFileSync(swaggerFile, 'utf8'));
   var options = {
@@ -26,13 +34,23 @@ function bundle(swaggerFile) {
   };
   JsonRefs.clearCache();
   return JsonRefs.resolveRefs(root, options).then(function (results) {
+    var resErrors = {};
+    for (const [k,v] of Object.entries(results.refs)) {
+      if ('missing' in v && v.missing === true)
+        resErrors[k] = v.error;
+    }
+
+    if (Object.keys(resErrors).length > 0) {
+      return Promise.reject(dictToString(resErrors));
+    }
+
     return results.resolved;
   }, function (e) {
       var error = {};
       Object.getOwnPropertyNames(e).forEach(function (key) {
         error[key] = e[key];
       });
-      return Promise.reject(error);
+      return Promise.reject(dictToString(error));
   });
 }
 
