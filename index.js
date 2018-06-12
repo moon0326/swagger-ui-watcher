@@ -35,14 +35,13 @@ function bundle(swaggerFile) {
     if (Object.keys(resErrors).length > 0) {
       return Promise.reject(resErrors);
     }
-    
+
     return results.resolved;
   }, function (e) {
       var error = {};
       Object.getOwnPropertyNames(e).forEach(function (key) {
         error[key] = e[key];
       });
-
       return Promise.reject(error);
   });
 }
@@ -64,7 +63,6 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
       bundle(swaggerFile).then(function (bundled) {
         socket.emit('updateSpec', JSON.stringify(bundled));
       }, function (err) {
-        console.log(err);
         socket.emit('showError', err);
       });
     });
@@ -76,7 +74,6 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
       var bundleString = JSON.stringify(bundled, null, 2);
       io.sockets.emit('updateSpec', bundleString);
     }, function (err) {
-      console.log(err);
       io.sockets.emit('showError', err);
     });
   });
