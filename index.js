@@ -25,6 +25,7 @@ function bundle(swaggerFile) {
   var root = yaml.safeLoad(fs.readFileSync(swaggerFile, 'utf8'));
   var options = {
     filter : ['relative', 'remote'],
+    resolveCirculars: true,
     location: swaggerFile,
     loaderOptions : {
       processContent : function (res, callback) {
