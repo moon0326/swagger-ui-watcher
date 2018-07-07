@@ -12,12 +12,12 @@
     "commander": "^2.9.0",
     "express": "^4.15.3",
     "js-yaml": "^3.10.0",
-    "json-refs": "^3.0.2",
+    "json-refs": "^3.0.5",
     "node-watch": "^0.5.5",
     "open": "0.0.5",
     "path": "^0.12.7",
     "socket.io": "^2.0.3",
-    "swagger-editor-dist": "^3.3.1"
+    "swagger-editor-dist": "3.6.0"
   },
   "bin": {
     "swagger-ui-watcher": "bin/swagger-ui-watcher.js"
