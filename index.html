@@ -85,10 +85,17 @@
     var swaggerEditor = document.getElementById('swagger-editor');
     socket.on('updateSpec', function(data) {
       console.log(data);
+      var scrollElement = document.getElementsByClassName('Pane2')[0];
+      var tempScrollTop = scrollElement ? scrollElement.scrollTop : 0;
       swaggerEditor.style.display = 'block';
       errorsContainer.style.display = 'none';
       editor.specActions.updateLoadingStatus("success");
       editor.specActions.updateSpec(data);
+      if (tempScrollTop) {
+        setTimeout(function() {
+          scrollElement.scrollTop = tempScrollTop;
+        }, 100);
+      }
     });
     socket.on('showError', function(data) {
       errorsContainer.style.display = 'block';
