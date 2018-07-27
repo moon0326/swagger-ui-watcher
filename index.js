@@ -37,7 +37,7 @@ function bundle(swaggerFile) {
   return JsonRefs.resolveRefs(root, options).then(function (results) {
     var resErrors = {};
     for (const [k,v] of Object.entries(results.refs)) {
-      if ('missing' in v && v.missing === true)
+      if ('missing' in v && v.missing === true && (v.type == 'relative' || v.type === 'remote'))
         resErrors[k] = v.error;
     }
 
