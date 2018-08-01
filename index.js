@@ -2,7 +2,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var open = require('open');
+var opn = require('opn');
 var nodeModules = path.resolve(path.resolve(__dirname, ''), 'node_modules');
 var swaggerEditorDist = path.dirname(require.resolve('swagger-editor-dist/index.html'));
 var express = require('express');
@@ -90,7 +90,7 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
   server.listen(port,hostname, function() {
     var serverUrl = `http://${hostname}:${port}`;
     console.log(`Listening on ${serverUrl}`);
-    if (openBrowser) open(serverUrl);
+    if (openBrowser) opn(serverUrl);
   });
 }
 
