@@ -12,9 +12,9 @@ Swagger UI Watcher detects changes in your local Swagger files and reload Swagge
 ## Installation
 
 | Version | Swagger Version |
-|--------|--------|
-|  1.0.10      |   2     |
-|  2.0 | 3 |
+|---------|-----------------|
+| 1.0.10  | 2               |
+| >=2.0   | 3               |
 
 
 ```
