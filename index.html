@@ -70,38 +70,44 @@
 <script>
   window.onload = function() {
     // Build a system
-    var editor = SwaggerEditorBundle({
-      dom_id: '#swagger-editor',
-      layout: 'EditorLayout',
-      presets: [
-        SwaggerEditorStandalonePreset
-      ]
-    });
-    window.editor = editor;
+    var editor;
 
     var socket = io.connect(window.location.href);
     var errorsContainer = document.getElementById('errors-container');
     var errors = document.getElementById('errors');
-    var swaggerEditor = document.getElementById('swagger-editor');
-    socket.on('updateSpec', function(data) {
-      console.log(data);
-      var scrollElement = document.getElementsByClassName('Pane2')[0];
-      var tempScrollTop = scrollElement ? scrollElement.scrollTop : 0;
-      swaggerEditor.style.display = 'block';
-      errorsContainer.style.display = 'none';
-      editor.specActions.updateLoadingStatus("success");
-      editor.specActions.updateSpec(data);
-      if (tempScrollTop) {
-        setTimeout(function() {
-          scrollElement.scrollTop = tempScrollTop;
-        }, 100);
-      }
-    });
-    socket.on('showError', function(data) {
-      errorsContainer.style.display = 'block';
-      swaggerEditor.style.display = 'none';
-      console.log(data);
-      errors.innerHTML = data;
+    var swaggerEditor = document.getElementById("swagger-editor");
+    
+    socket.once('swaggerOptions', function (options) {
+      editor = SwaggerEditorBundle({
+        dom_id: "#swagger-editor",
+        layout: "EditorLayout",
+        presets: [SwaggerEditorStandalonePreset],
+        ...options,
+      });
+
+      window.editor = editor;
+
+      socket.on('updateSpec', function(data) {
+        console.log(data);
+        var scrollElement = document.getElementsByClassName('Pane2')[0];
+        var tempScrollTop = scrollElement ? scrollElement.scrollTop : 0;
+        swaggerEditor.style.display = 'block';
+        errorsContainer.style.display = 'none';
+        editor.specActions.updateLoadingStatus("success");
+        editor.specActions.updateSpec(data);
+        if (tempScrollTop) {
+          setTimeout(function() {
+            scrollElement.scrollTop = tempScrollTop;
+          }, 100);
+        }
+      });
+      socket.on('showError', function(data) {
+        errorsContainer.style.display = 'block';
+        swaggerEditor.style.display = 'none';
+        console.log(data);
+        errors.innerHTML = data;
+      });
+      socket.emit('swaggerReady', {});
     });
 
     socket.emit('uiReady', {});

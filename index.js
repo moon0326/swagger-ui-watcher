@@ -55,7 +55,7 @@ function bundle(swaggerFile) {
   });
 }
 
-function start(swaggerFile, targetDir, port, hostname, openBrowser) {
+function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOptions) {
   app.get('/', function(req, res) {
     res.sendFile(__dirname + "/index.html");
   });
@@ -68,12 +68,15 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
   });
 
   io.on('connection', function(socket) {
-    socket.on('uiReady', function(data) {
+    socket.on('swaggerReady', function (data) {
       bundle(swaggerFile).then(function (bundled) {
         socket.emit('updateSpec', JSON.stringify(bundled));
       }, function (err) {
         socket.emit('showError', err);
       });
+    });
+    socket.on('uiReady', function(data) {
+      socket.emit('swaggerOptions', swaggerUIOptions);
     });
   });
 
