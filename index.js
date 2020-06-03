@@ -75,7 +75,7 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOpt
         socket.emit('showError', err);
       });
     });
-    socket.on('uiReady', function(data) {
+    socket.once('uiReady', function(data) {
       socket.emit('swaggerOptions', swaggerUIOptions);
     });
   });
