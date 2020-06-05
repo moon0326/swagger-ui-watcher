@@ -9,15 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.9.0",
-    "express": "^4.15.3",
-    "js-yaml": "^3.10.0",
-    "json-refs": "^3.0.5",
-    "node-watch": "^0.5.5",
-    "opn": "5.3.0",
+    "commander": "^5.1.0",
+    "express": "^4.17.1",
+    "js-yaml": "^3.14.0",
+    "json-refs": "^3.0.15",
+    "node-watch": "^0.6.4",
+    "open": "^7.0.4",
     "path": "^0.12.7",
-    "socket.io": "^2.0.3",
-    "swagger-editor-dist": "3.6.20"
+    "socket.io": "^2.3.0",
+    "swagger-editor-dist": "^3.11.1"
   },
   "bin": {
     "swagger-ui-watcher": "bin/swagger-ui-watcher.js"
