@@ -36,7 +36,7 @@ swagger-ui-watcher ./main-swagger-file.json --bundle=./bundled.json
 
 Click the image to see it in action
 
-[![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/s-77RrN311c?autoplay=1)
+[![Alt text](http://i.imgur.com/UQMAn4U.png)](https://www.youtube.com/embed/ejBS75q3ouo?autoplay=1)
 
 ## Do What You Want to Public License
 ```
