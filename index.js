@@ -80,7 +80,7 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOpt
     });
   });
 
-  chokidar.watch(targetDir).on('all', function(eventType, name) {
+  chokidar.watch(targetDir).on('change', function(eventType, name) {
     bundle(swaggerFile).then(function (bundled) {
       console.log("File changed. Sent updated spec to the browser.");
       var bundleString = JSON.stringify(bundled, null, 2);
