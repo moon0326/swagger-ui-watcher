@@ -9,7 +9,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var watch = require('node-watch');
+var chokidar = require('chokidar');
 var JsonRefs = require('json-refs');
 var yaml = require('js-yaml');
 
@@ -80,7 +80,7 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOpt
     });
   });
 
-  watch(targetDir, {recursive: true}, function(eventType, name) {
+  chokidar.watch(targetDir).on('all', function(eventType, name) {
     bundle(swaggerFile).then(function (bundled) {
       console.log("File changed. Sent updated spec to the browser.");
       var bundleString = JSON.stringify(bundled, null, 2);
