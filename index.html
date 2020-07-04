@@ -88,7 +88,7 @@
       window.editor = editor;
 
       socket.on('updateSpec', function(data) {
-        console.log(data);
+        console.log(new Date().toString() + 'Updating Spec...');
         var scrollElement = document.getElementsByClassName('Pane2')[0];
         var tempScrollTop = scrollElement ? scrollElement.scrollTop : 0;
         swaggerEditor.style.display = 'block';
