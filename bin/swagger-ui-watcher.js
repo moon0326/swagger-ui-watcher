@@ -7,6 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var swaggerFileValue;
 var targetDirValue;
+var swaggerUIOptions = {};
 var help = 'Enter "swagger-ui-watcher --help" for more details.';
 
 /*
@@ -20,6 +21,7 @@ program
     .option('-h, --host <Hostname|Ip>', 'Host to be used. Default is 127.0.0.1')
     .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
     .option('--no-open', 'Do not open the view page in the default browser')
+    .option('-c, --config <JSON file>', 'Path to json file containing swagger ui options')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -70,13 +72,18 @@ if (!fs.existsSync(swaggerFileValue)) {
     process.exit(1);
 }
 
+if(program.config) {
+    swaggerUIOptions = JSON.parse(fs.readFileSync(program.config).toString())
+}
+
 if (program.bundle === null) {
     require("../index.js").start(
         swaggerFileValue,
         targetDirValue,
         program.port,
         program.host,
-        program.open
+        program.open,
+        swaggerUIOptions
     );
 } else {
     require("../index.js").build(

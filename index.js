@@ -2,7 +2,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var opn = require('opn');
+var open = require('open');
 var nodeModules = path.resolve(path.resolve(__dirname, ''), 'node_modules');
 var swaggerEditorDist = path.dirname(require.resolve('swagger-editor-dist/index.html'));
 var express = require('express');
@@ -55,7 +55,7 @@ function bundle(swaggerFile) {
   });
 }
 
-function start(swaggerFile, targetDir, port, hostname, openBrowser) {
+function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOptions) {
   app.get('/', function(req, res) {
     res.sendFile(__dirname + "/index.html");
   });
@@ -68,12 +68,15 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
   });
 
   io.on('connection', function(socket) {
-    socket.on('uiReady', function(data) {
+    socket.on('swaggerReady', function (data) {
       bundle(swaggerFile).then(function (bundled) {
         socket.emit('updateSpec', JSON.stringify(bundled));
       }, function (err) {
         socket.emit('showError', err);
       });
+    });
+    socket.once('uiReady', function(data) {
+      socket.emit('swaggerOptions', swaggerUIOptions);
     });
   });
 
@@ -90,7 +93,7 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser) {
   server.listen(port,hostname, function() {
     var serverUrl = `http://${hostname}:${port}`;
     console.log(`Listening on ${serverUrl}`);
-    if (openBrowser) opn(serverUrl);
+    if (openBrowser) open(serverUrl);
   });
 }
 
