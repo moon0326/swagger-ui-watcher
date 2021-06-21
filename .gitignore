@@ -1,3 +1,6 @@
+# Use either npm or yarn lockfiles, not both
+/package-lock.json
+
 # Created by https://www.gitignore.io
 
 backup
