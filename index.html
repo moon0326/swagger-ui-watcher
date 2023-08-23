@@ -48,53 +48,52 @@
       border:none;
     }
 
+	.Pane:first-child{
+		display: none;
+	}
+
     .Pane2 {
       overflow-y: scroll;
       width: 100% !important;
     }
 
+	.swagger-editor__top-bar {
+		display: none;
+	}
+
     #swagger-editor .container .SplitPane {
       height: 100% !important;
     }
   </style>
-  <link href="/swagger-editor.css" rel="stylesheet">
+  <link href="/swagger-editor5.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
 </head>
 
 <body>
 <div id="swagger-editor"></div>
-<script src="/swagger-editor-bundle.js"></script>
-<script src="/swagger-editor-standalone-preset.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="/swagger-editor5.js"></script>
 <script>
   window.onload = function() {
-    // Build a system
-    var editor;
-
     var socket = io.connect(window.location.href);
     var errorsContainer = document.getElementById('errors-container');
     var errors = document.getElementById('errors');
     var swaggerEditor = document.getElementById("swagger-editor");
     
     socket.once('swaggerOptions', function (options) {
-      editor = SwaggerEditorBundle({
-        dom_id: "#swagger-editor",
-        layout: "EditorLayout",
-        presets: [SwaggerEditorStandalonePreset],
-        ...options,
-      });
-
-      window.editor = editor;
-
       socket.on('updateSpec', function(data) {
         console.log(new Date().toString() + 'Updating Spec...');
         var scrollElement = document.getElementsByClassName('Pane2')[0];
         var tempScrollTop = scrollElement ? scrollElement.scrollTop : 0;
         swaggerEditor.style.display = 'block';
         errorsContainer.style.display = 'none';
-        editor.specActions.updateLoadingStatus("success");
-        editor.specActions.updateSpec(data);
+		const element = React.createElement(SwaggerEditor, {spec: data});
+		const domContainer = document.querySelector('#swagger-editor');
+		ReactDOM.render(element, domContainer);
+
         if (tempScrollTop) {
           setTimeout(function() {
             scrollElement.scrollTop = tempScrollTop;
