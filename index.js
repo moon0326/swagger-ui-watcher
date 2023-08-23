@@ -61,7 +61,8 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOpt
   });
 
   app.use(express.static(swaggerEditorDist));
-  app.use(express.static('swagger5'));
+  app.use(express.static(path.resolve(path.resolve(__dirname, ''), 'swagger5')));
+
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
