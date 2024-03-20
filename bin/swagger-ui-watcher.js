@@ -8,6 +8,7 @@ var path = require('path');
 var swaggerFileValue;
 var targetDirValue;
 var swaggerUIOptions = {};
+var watchIgnore = undefined;
 var help = 'Enter "swagger-ui-watcher --help" for more details.';
 
 /*
@@ -22,6 +23,7 @@ program
     .option('-b, --bundle <bundleTo>', 'Create bundle and save it to bundleTo')
     .option('--no-open', 'Do not open the view page in the default browser')
     .option('-c, --config <JSON file>', 'Path to json file containing swagger ui options')
+    .option('-i, --ignore <matches>', 'File or path omitted from watching')
     .action(function(swaggerFile, targetDir) {
         swaggerFileValue = swaggerFile;
         targetDirValue = targetDir;
@@ -62,6 +64,10 @@ if (program.bundle === swaggerFileValue) {
     process.exit(1);
 }
 
+if (program.ignore) {
+    watchIgnore = path.resolve(program.ignore);
+}
+
 if (!fs.existsSync(targetDirValue)) {
     console.error(targetDirValue + " does not exist.");
     process.exit(1);
@@ -83,7 +89,8 @@ if (program.bundle === null) {
         program.port,
         program.host,
         program.open,
-        swaggerUIOptions
+        swaggerUIOptions,
+        watchIgnore
     );
 } else {
     require("../index.js").build(
