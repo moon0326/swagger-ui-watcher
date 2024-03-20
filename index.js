@@ -55,7 +55,7 @@ function bundle(swaggerFile) {
   });
 }
 
-function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOptions) {
+function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOptions, watchIgnore) {
   app.get('/', function(req, res) {
     res.sendFile(__dirname + "/index.html");
   });
@@ -80,7 +80,7 @@ function start(swaggerFile, targetDir, port, hostname, openBrowser, swaggerUIOpt
     });
   });
 
-  chokidar.watch(targetDir).on('change', function(eventType, name) {
+  chokidar.watch(targetDir, {ignored: watchIgnore}).on('change', function(eventType, name) {
     bundle(swaggerFile).then(function (bundled) {
       console.log("File changed. Sent updated spec to the browser.");
       var bundleString = JSON.stringify(bundled, null, 2);
