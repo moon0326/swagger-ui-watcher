@@ -37,6 +37,7 @@ swagger-ui-watcher ./main-swagger-file.json
 | --no-open                    | Do not open the view page in the default browser                                                                                                                              |
 | -c --config <JSON_file>      | JSON file containing any of the [Swagger UI options](https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md). Example: `{"withCredentials": true}` |
 | -b --bundle <bundleLocation> | Create bundle at the specified location                                                                                                                                       |
+| -i --ignore <matches>        | File or path omitted from watching. Supports globbing                                                                                                                         |
 
 For creating the bundled file, provide the optional argument `bundle`
 
